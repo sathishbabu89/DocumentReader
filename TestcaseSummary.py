@@ -240,13 +240,21 @@ if page == "Project Analysis":
     uploaded_file = st.file_uploader("Upload Spring Boot Project (ZIP)", type="zip")
 
     if uploaded_file:
+        # Initialize progress bar
+        progress_bar = st.progress(0)
+        status_text = st.empty()
+
+        # Step 1: Extract the project ZIP file
         with zipfile.ZipFile(uploaded_file, 'r') as zip_ref:
             project_dir = "/tmp/springboot_project_analysis"
             os.makedirs(project_dir, exist_ok=True)
             zip_ref.extractall(project_dir)
 
+        # Update progress bar after extraction
+        progress_bar.progress(30)
+        status_text.text("Project ZIP extracted. Analyzing project...")
 
-         # LLM initialization
+        # LLM initialization
         llm = HuggingFaceEndpoint(
             repo_id="meta-llama/Llama-3.2-3B-Instruct",
             max_new_tokens=2048,
@@ -258,13 +266,25 @@ if page == "Project Analysis":
             huggingfacehub_api_token=HUGGINGFACE_API_TOKEN,
         )
 
-        # Analyze the project and display the summary
+        # Step 2: Analyze the project (classes, interfaces, relationships)
         classes, interfaces, relationships = analyze_project_classes_and_interfaces(project_dir)
+        
+        # Update progress bar after analysis
+        progress_bar.progress(60)
+        status_text.text("Project analysis complete. Generating business summary...")
+
+        # Display project summary
         display_project_summary(classes, interfaces, relationships)
 
-         # Generate and display the business summary after the project analysis
+        # Step 3: Generate the business summary
         st.subheader("Business Summary:")
         business_summary = generate_business_summary(classes, interfaces, llm)
+
+        # Update progress bar after summary generation
+        progress_bar.progress(100)
+        status_text.text("Business summary generated.")
+
+        # Display the business summary
         st.write(business_summary)
 
 elif page == "Test Case Generator":
