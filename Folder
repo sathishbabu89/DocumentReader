@@ -1,0 +1,18 @@
+project-root/
+├── src/
+│   ├── main/
+│   │   ├── java/
+│   │   │   └── com/yourcompany/yourproject/
+│   │   │       ├── controller/
+│   │   │       ├── service/
+│   │   │       ├── model/
+│   │   │       └── repository/
+│   │   └── resources/
+│   │       ├── application.properties (or application.yml)
+│   │       └── static/
+│   └── test/
+├── pom.xml
+├── Dockerfile (Optional)
+├── kubernetes/ (Optional)
+│   ├── deployment.yaml
+│   └── service.yaml
