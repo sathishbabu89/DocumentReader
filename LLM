@@ -5,3 +5,40 @@ meta-llama/Meta-Llama-3-8B-Instruct
 deepseek-ai/deepseek-coder-1.3b-instruct
 google/gemma-1.1-2b-it
 Qwen/Qwen2.5-Coder-1.5B
+-------------------------
+2025
+----
+meta-llama/Meta-Llama-3-8B-Instruct
+meta-llama/Llama-3.2-3B-Instruct
+mistralai/Mistral-Nemo-Instruct-2407
+mistralai/Mistral-7B-Instruct-v0.3
+
+https://github.com/spring-projects/spring-data-mongodb 
+https://github.com/nammayatri/nammayatri
+https://github.com/apache/avro
+https://github.com/mwolff44/pk-sbc
+https://github.com/aws/aws-sdk-net-extensions-cognito
+
+prompt = f"""
+Convert the following C++ code into Java Spring Boot. Generate separate classes only if needed by the logic of the C++ code, avoiding unnecessary layers.
+Only generate a separate `Controller`, `Service`, and `Repository` if the C++ code includes logic for handling HTTP requests, database interactions, or business logic. If the code is simple (e.g., "Hello World"), convert it within a single `MainApplication` class.
+
+Ensure to:
+1. Conditionally create classes for each layer (e.g., 'Controller', 'Service', 'Entity', 'Repository') based on the complexity of the C++ code.
+2. Include 'application.yaml' and 'pom.xml' with only the required dependencies.
+3. Annotate each class appropriately (e.g., '@SpringBootApplication', '@RestController', '@Service', '@Entity', '@Repository', etc.).
+4. Avoid generating duplicate code; ensure each logic appears only once.
+5. Generate distinct downloadable files for each of the following: Controller, Service, Repository, Entity, the main Spring Boot application class (with the main method), pom.xml with needed dependencies, and application.yaml file if applicable.
+6. Instead of a single Java file, generate multiple files for each service, controller, repository, entity, pom.xml, and application.yaml.
+
+Additionally, incorporate deployment and scaling considerations:
+1. Ensure the generated application is container-friendly by including a `Dockerfile` and a `docker-compose.yml` file for deployment.
+2. Optimize application.yaml for production readiness, such as externalized configuration (e.g., environment variables) and default profiles for development and production.
+3. Include comments or configurations that enable horizontal scaling (e.g., thread pool settings, database connection pool settings, etc.).
+4. If applicable, add configurations for readiness and liveness probes to support Kubernetes deployments.
+5. Generate guidelines or a deployment script (e.g., Bash or YAML) to deploy the application to Kubernetes, emphasizing scalability and resilience.
+
+Here is the C++ code snippet:
+{cpp_code}
+"""
+
